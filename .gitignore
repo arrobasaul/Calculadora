@@ -1,0 +1,67 @@
+# Build artifacts
+*.o
+*.obj
+*.ko
+*.mod
+*.slo
+*.lo
+*.la
+*.lai
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.elf
+*.d
+*.map
+*.exp
+*.ilk
+*.pdb
+*.gch
+*.pch
+
+# Compiled resources
+*.res
+*.aps
+*.rc.o
+*.rc.res
+
+# Temporary files
+*~
+*.bak
+*.swp
+*.swo
+*.tmp
+*.log
+*.orig
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.suo
+*.user
+*.ncb
+*.aps
+*.plg
+*.opt
+*.filters
+*.vcproj.*.user
+*.vcxproj.user
+*.sln.docstates
+*.vs/
+_astcache/
+
+# CMake build directories
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Other common exclusions
+*Cache*
+*Thumbs.db
+.DS_Store
