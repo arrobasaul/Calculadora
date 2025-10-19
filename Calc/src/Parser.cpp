@@ -31,7 +31,6 @@ std::deque<Token> Parser::GetTokens(std::string expressionLine) {
   std::string inputElement;
   Token token;
   std::deque<Token> tokenStack;
-
   std::istringstream iss(expressionLine);
 
   int tamanioTotal = (int)expressionLine.length();
@@ -43,6 +42,17 @@ std::deque<Token> Parser::GetTokens(std::string expressionLine) {
     switch (actual)
     {
     case '(':
+      if((caracterActual-1) >= 0)
+      {
+        if (std::isdigit(expressionLine[caracterActual-1]))
+        {
+          token.elementStr = "*";
+          token.type = Token::Type::Operator;
+          token.precedence = presedents['*'];
+          tokenStack.push_back(token);
+        }
+      }
+      
       token.elementStr = actual;
       token.type = Token::Type::LeftP;
       token.precedence = -1;
@@ -52,46 +62,57 @@ std::deque<Token> Parser::GetTokens(std::string expressionLine) {
     case '-':
       token.elementStr = actual;
       token.type = Token::Type::Operator;
-      token.precedence = 2;
+      token.precedence = presedents[actual];
       caracterActual++;
       tokenStack.push_back(token);
       break;
     case '+':
       token.elementStr = actual;
       token.type = Token::Type::Operator;
-      token.precedence = 2;
+      token.precedence = presedents[actual];
       caracterActual++;
       tokenStack.push_back(token);
       break;
     case '*':
       token.elementStr = actual;
       token.type = Token::Type::Operator;
-      token.precedence = 3;
+      token.precedence = presedents[actual];
       caracterActual++;
       tokenStack.push_back(token);
       break;
     case '/':
       token.elementStr = actual;
       token.type = Token::Type::Operator;
-      token.precedence = 3;
+      token.precedence = presedents[actual];
       caracterActual++;
       tokenStack.push_back(token);
       break;
     case '%':
       token.elementStr = actual;
       token.type = Token::Type::Operator;
-      token.precedence = 3;
+      token.precedence = presedents[actual];
       caracterActual++;
       tokenStack.push_back(token);
       break;
     case '^':
       token.elementStr = actual;
       token.type = Token::Type::Operator;
-      token.precedence = 3;
+      token.precedence = presedents[actual];
       caracterActual++;
       tokenStack.push_back(token);
       break;
     case '=':
+      caracterActual++;
+      break;
+    case '$':
+      if(expressionLine[caracterActual+1] == '?')
+      {
+        caracterActual++;
+        token.elementStr = Last;
+        token.precedence = -1;
+        token.type = Token::Type::Number;
+        tokenStack.push_back(token);
+      }
       caracterActual++;
       break;
     case ')':
@@ -304,5 +325,6 @@ double Parser::CalculateResult(std::queue<Token> outputQueue, std::unordered_map
         variableActual = "";
     }
   }
+  Last = std::to_string(operandsV[0]);
  return operandsV[0];
 }

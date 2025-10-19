@@ -16,7 +16,7 @@ int main(){
     Token pi{};
     pi.type = Token::Type::Number;
     pi.precedence = -1;
-    pi.elementStr = "3.14";
+    pi.elementStr = "3.14159265358979323846";
     
     Parser parser;
     Vars["pi"] =  pi;
